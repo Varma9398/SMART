@@ -1,7 +1,8 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "ai-palette-genius",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://varma9398.github.io/SMART",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +10,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && echo 'Build complete. Push the dist folder to GitHub Pages.'"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

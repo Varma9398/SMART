@@ -1,4 +1,4 @@
-# Smart Palette Pro
+# AI PaletteGenius
 
 ## Project info
 

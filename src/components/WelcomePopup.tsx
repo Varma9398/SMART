@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Sparkles, Palette, Download, Eye, Layers } from 'lucide-react';
+import { Sparkles, Palette, Target, Eye, MessageSquare, Workflow } from 'lucide-react';
 
 interface WelcomePopupProps {
   isOpen: boolean;
@@ -23,51 +23,54 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({ isOpen, onClose }) => {
                 <Sparkles className="w-8 h-8 text-primary" />
               </div>
               <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                Welcome to Smart Palette Pro
+                Welcome to AI PaletteGenius
               </h2>
               <p className="text-muted-foreground text-lg">
-                Every great design starts with the perfect color palette
+                AI-Powered Color Intelligence Platform
+              </p>
+              <p className="text-sm text-muted-foreground/70 mt-1">
+                Colors that don't just look good—they perform better
               </p>
             </div>
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-background/20">
-                  <Palette className="w-5 h-5 text-primary mt-1" />
+                  <MessageSquare className="w-5 h-5 text-green-500 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-1">AI-Powered Intelligence</h3>
+                    <h3 className="font-semibold mb-1">AI Color Assistant</h3>
                     <p className="text-sm text-muted-foreground">
-                      Smart color generation based on design principles
+                      Natural language color queries
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-background/20">
-                  <Download className="w-5 h-5 text-primary mt-1" />
+                  <Target className="w-5 h-5 text-orange-500 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-1">20+ Export Formats</h3>
+                    <h3 className="font-semibold mb-1">Performance-Based</h3>
                     <p className="text-sm text-muted-foreground">
-                      Export in multiple professional formats
+                      Colors optimized for conversion
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-background/20">
-                  <Eye className="w-5 h-5 text-primary mt-1" />
+                  <Palette className="w-5 h-5 text-blue-500 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-1">Accessibility Checking</h3>
+                    <h3 className="font-semibold mb-1">Brand Intelligence</h3>
                     <p className="text-sm text-muted-foreground">
-                      Real-time WCAG compliance verification
+                      Logo-aware color generation
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-background/20">
-                  <Layers className="w-5 h-5 text-primary mt-1" />
+                  <Eye className="w-5 h-5 text-purple-500 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-1">Brand Identity Tools</h3>
+                    <h3 className="font-semibold mb-1">Accessibility-First</h3>
                     <p className="text-sm text-muted-foreground">
-                      Complete suite of brand color tools
+                      WCAG 2.1 AAA compliance built-in
                     </p>
                   </div>
                 </div>
