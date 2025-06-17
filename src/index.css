@@ -199,72 +199,20 @@ input:focus + svg {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground));
-  border-radius: 4px;
+  background: hsl(var(--border));
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
-}
-
-/* Dialog dark theme overrides */
-[data-radix-dialog-content] {
-  background: hsl(var(--card)) !important;
-  border-color: hsl(var(--border)) !important;
-  color: hsl(var(--card-foreground)) !important;
-}
-
-[data-radix-dialog-overlay] {
-  background: rgba(0, 0, 0, 0.8) !important;
-  backdrop-filter: blur(4px) !important;
-}
-
-/* Force dark theme for dialog content */
-.dialog-content-dark {
-  background: hsl(var(--card)) !important;
-  border-color: hsl(var(--border)) !important;
-  color: hsl(var(--card-foreground)) !important;
-}
-
-.dialog-content-dark * {
-  color: inherit !important;
-}
-
-/* Ensure dialog inputs use dark theme */
-.dialog-content-dark input {
-  background: hsl(var(--input)) !important;
-  border-color: hsl(var(--border)) !important;
-  color: hsl(var(--foreground)) !important;
-}
-
-.dialog-content-dark input::placeholder {
-  color: hsl(var(--muted-foreground)) !important;
-}
-
-/* Ensure dialog buttons use dark theme */
-.dialog-content-dark button {
-  background: hsl(var(--secondary)) !important;
-  color: hsl(var(--secondary-foreground)) !important;
-  border-color: hsl(var(--border)) !important;
-}
-
-.dialog-content-dark button:hover {
-  background: hsl(var(--accent)) !important;
-  color: hsl(var(--accent-foreground)) !important;
-}
-
-.dialog-content-dark button[data-state="active"],
-.dialog-content-dark button:focus {
-  background: hsl(var(--primary)) !important;
-  color: hsl(var(--primary-foreground)) !important;
 }
 
 @keyframes gradientBG {
