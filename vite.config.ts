@@ -19,5 +19,10 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: '/SPP/',
+  base: process.env.NODE_ENV === 'production' ? '/SMART/' : '/SPP/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+  },
 }));
