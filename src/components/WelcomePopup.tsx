@@ -2,6 +2,7 @@ import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Palette, Target, Eye, MessageSquare, Workflow, Zap, Star, ArrowRight } from 'lucide-react';
+import { trackEngagement } from '@/utils/analytics';
 
 interface WelcomePopupProps {
   isOpen: boolean;
@@ -9,8 +10,13 @@ interface WelcomePopupProps {
 }
 
 const WelcomePopup: React.FC<WelcomePopupProps> = ({ isOpen, onClose }) => {
+  const handleClose = () => {
+    trackEngagement.welcomePopupClosed();
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[700px] p-0 overflow-hidden border-none">
         <div className="relative">
           {/* Enhanced animated gradient background */}
@@ -123,7 +129,7 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({ isOpen, onClose }) => {
                 <Button 
                   size="lg" 
                   className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold group transition-all duration-300 transform hover:scale-105"
-                  onClick={onClose}
+                  onClick={handleClose}
                 >
                   Start Creating
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

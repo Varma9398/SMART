@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Search, ChevronDown, ChevronRight, Sparkles, Target, Palette, Eye, MessageSquare, Workflow, CheckCircle } from 'lucide-react';
+import { trackOnboarding } from '@/utils/analytics';
 
 const DESIGNER_CATEGORIES = {
   'Digital & Interface Design': [
@@ -122,6 +123,24 @@ export default function OnboardingModal({ open, onComplete }: { open: boolean; o
     );
   };
 
+  // Handle designer type selection with tracking
+  const handleDesignerTypeSelect = (role: string) => {
+    setDesignerType(role);
+    trackOnboarding.designerTypeSelected(role);
+  };
+
+  // Handle goal selection with tracking
+  const handleGoalSelect = (selectedGoal: string) => {
+    setGoal(selectedGoal);
+    trackOnboarding.goalSelected(selectedGoal);
+  };
+
+  // Handle skill level selection with tracking
+  const handleSkillSelect = (selectedSkill: string) => {
+    setSkill(selectedSkill);
+    trackOnboarding.skillLevelSelected(selectedSkill);
+  };
+
   // Auto-expand categories when searching
   useEffect(() => {
     if (searchQuery) {
@@ -217,6 +236,11 @@ export default function OnboardingModal({ open, onComplete }: { open: boolean; o
   const handleBack = () => setStep((s) => s - 1);
   const handleFinish = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
+    trackOnboarding.completed({
+      designerType: designerType || '',
+      goal: goal || '',
+      skillLevel: skill || ''
+    });
     onComplete();
   };
 
@@ -293,7 +317,7 @@ export default function OnboardingModal({ open, onComplete }: { open: boolean; o
                           <Button
                             key={role}
                             variant={designerType === role ? 'default' : 'ghost'}
-                            onClick={() => setDesignerType(role)}
+                            onClick={() => handleDesignerTypeSelect(role)}
                             className={`w-full justify-start text-sm ${
                               designerType === role 
                                 ? 'bg-blue-600 hover:bg-blue-700 text-white' 
@@ -327,7 +351,7 @@ export default function OnboardingModal({ open, onComplete }: { open: boolean; o
                   <Button 
                     key={g} 
                     variant={goal === g ? 'default' : 'outline'} 
-                    onClick={() => setGoal(g)}
+                    onClick={() => handleGoalSelect(g)}
                     className={`h-12 text-left justify-start ${
                       goal === g 
                         ? 'bg-blue-600 hover:bg-blue-700 text-white' 
@@ -349,7 +373,7 @@ export default function OnboardingModal({ open, onComplete }: { open: boolean; o
                   <Button 
                     key={s} 
                     variant={skill === s ? 'default' : 'outline'} 
-                    onClick={() => setSkill(s)}
+                    onClick={() => handleSkillSelect(s)}
                     className={`h-12 text-left justify-start ${
                       skill === s 
                         ? 'bg-blue-600 hover:bg-blue-700 text-white' 
