@@ -1,4 +1,4 @@
-# AI PaletteGenius
+# AI Colour Engine
 
 ## Project info
 

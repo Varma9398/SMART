@@ -115,7 +115,7 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
             className="inline-flex items-center space-x-2 text-primary font-semibold hover:text-primary/80 transition-colors cursor-pointer"
           >
             <Sparkles className="w-4 h-4" />
-            <span>Start creating with AI PaletteGenius</span>
+            <span>Start creating with AI Colour Engine</span>
           </button>
         </div>
       </CardContent>

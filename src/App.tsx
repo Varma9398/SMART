@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [onboardingOpen, setOnboardingOpen] = React.useState(() => {
-    return localStorage.getItem('ai_palettegenius_onboarding_complete') !== 'true';
+    return localStorage.getItem('ai_colour_engine_onboarding_complete') !== 'true';
   });
 
   return (

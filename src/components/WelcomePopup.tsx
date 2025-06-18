@@ -32,7 +32,7 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({ isOpen, onClose }) => {
               </div>
               
               <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3 animate-pulse">
-                Welcome to AI PaletteGenius
+                Welcome to AI Colour Engine
               </h2>
               
               <p className="text-muted-foreground text-xl font-medium mb-2">

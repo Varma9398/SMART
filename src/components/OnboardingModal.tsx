@@ -90,7 +90,7 @@ const SKILL_LEVELS = [
   'Advanced',
 ];
 
-const ONBOARDING_KEY = 'ai_palettegenius_onboarding_complete';
+const ONBOARDING_KEY = 'ai_colour_engine_onboarding_complete';
 
 export default function OnboardingModal({ open, onComplete }: { open: boolean; onComplete: () => void }) {
   const [step, setStep] = useState(0);
@@ -261,7 +261,7 @@ export default function OnboardingModal({ open, onComplete }: { open: boolean; o
         <DialogHeader>
           <DialogTitle className="text-white text-xl font-bold flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-blue-400" />
-            Welcome to AI Palette Genius
+            Welcome to AI Colour Engine
           </DialogTitle>
           
           {/* Progress Bar */}

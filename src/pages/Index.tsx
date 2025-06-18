@@ -291,13 +291,12 @@ const Index = () => {
               <Palette className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                AI PaletteGenius
-              </h1>
-              <p className="text-muted-foreground">AI-Powered Color Intelligence Platform</p>
-              <p className="text-xs text-muted-foreground/70 mt-1">
-                Colors that don't just look good—they perform better
-              </p>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <Palette className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900 dark:text-white">AI Colour Engine</span>
+              </div>
             </div>
           </div>
         </div>
@@ -415,7 +414,7 @@ const Index = () => {
       <footer className="max-w-7xl mx-auto mt-12 pt-8 border-t border-border/20">
         <div className="text-center text-sm text-muted-foreground">
           <p className="text-lg font-semibold mb-2">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI PaletteGenius</span>
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI Colour Engine</span>
             {' '} - Transform any image into conversion-optimized color schemes
           </p>
           <p className="text-sm text-muted-foreground/70">
