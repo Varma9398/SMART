@@ -1,0 +1,69 @@
+{
+  "name": "AI Colour Engine - Free Color Palette Generator",
+  "short_name": "AI Colour Engine",
+  "description": "AI-powered color palette generator for creating beautiful color schemes and combinations. Free online tool for designers, artists, and developers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["design", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/colorcraft-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/colorcraft-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "AI Colour Engine Desktop Interface"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "AI Colour Engine Mobile Interface"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Generate Palette",
+      "short_name": "Palette",
+      "description": "Quickly generate a new color palette",
+      "url": "/#/palette-generator",
+      "icons": [
+        {
+          "src": "/colorcraft-logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "AI Assistant",
+      "short_name": "AI Help",
+      "description": "Get AI-powered color suggestions",
+      "url": "/#/ai-assistant",
+      "icons": [
+        {
+          "src": "/colorcraft-logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+} 
