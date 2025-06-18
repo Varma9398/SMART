@@ -7,11 +7,6 @@
     "VERCEL": "1",
     "VITE_VERCEL": "true"
   },
-  "functions": {
-    "app/api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
