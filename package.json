@@ -8,10 +8,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:vercel": "cross-env VITE_VERCEL=true tsc && cross-env VITE_VERCEL=true vite build",
+    "build:github": "cross-env VITE_VERCEL=false tsc && cross-env VITE_VERCEL=false vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:github",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
