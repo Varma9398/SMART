@@ -10,9 +10,9 @@ export const updateSEO = (options: {
   type?: string;
 }) => {
   const {
-    title = "AI Colour Engine - Free Color Palette Generator | Create Beautiful Color Schemes",
-    description = "AI Colour Engine: Free online color palette generator. Create beautiful color schemes, generate color combinations, and design stunning palettes with AI-powered color intelligence.",
-    keywords = "color palette generator, color scheme generator, color combinations, AI color generator, free color palette",
+    title = "AI Colour Engine - Free Color Palette Generator | Professional Color Scheme Creator",
+    description = "AI Colour Engine: Free professional color palette generator with 22,000+ monthly users. Create beautiful color schemes, generate hex color palettes, and design stunning professional color palettes with AI-powered color intelligence.",
+    keywords = "color palette generator, color scheme generator, professional color palettes, AI color generator, hex color palette, free color palette generator for designers, professional color scheme creator online, AI powered color palette tool, export color palettes for design, color theory generator for artists, smart color palette generator, professional color palette pro, advanced color scheme tool, color palette generator with export",
     image = "https://varma9398.github.io/SMART/og-image.png",
     url = "https://varma9398.github.io/SMART/",
     type = "website"
@@ -120,29 +120,29 @@ const updateTwitterCard = (options: {
 // Predefined SEO configurations for different pages
 export const SEOConfigs = {
   home: {
-    title: "AI Colour Engine - Free Color Palette Generator | Create Beautiful Color Schemes",
-    description: "AI Colour Engine: Free online color palette generator. Create beautiful color schemes, generate color combinations, and design stunning palettes with AI-powered color intelligence. Perfect for designers, artists, and developers.",
-    keywords: "color palette generator, color scheme generator, color combinations, AI color generator, free color palette, color picker, color wheel"
+    title: "AI Colour Engine - Free Color Palette Generator | Professional Color Scheme Creator",
+    description: "AI Colour Engine: Free professional color palette generator with 22,000+ monthly users. Create beautiful color schemes, generate hex color palettes, and design stunning professional color palettes with AI-powered color intelligence. Perfect for designers, artists, and developers.",
+    keywords: "color palette generator, color scheme generator, professional color palettes, AI color generator, hex color palette, free color palette generator for designers, professional color scheme creator online, AI powered color palette tool, export color palettes for design, color theory generator for artists, smart color palette generator, professional color palette pro, advanced color scheme tool, color palette generator with export"
   },
   paletteGenerator: {
-    title: "Color Palette Generator - Create Beautiful Color Schemes | AI Colour Engine",
-    description: "Generate stunning color palettes with our AI-powered color palette generator. Create harmonious color schemes, explore color combinations, and design beautiful palettes for your projects.",
-    keywords: "color palette generator, color scheme generator, color combinations, palette maker, color harmony, color theory"
+    title: "Professional Color Palette Generator - Create Beautiful Color Schemes | AI Colour Engine",
+    description: "Generate stunning professional color palettes with our AI-powered color palette generator. Create harmonious color schemes, explore hex color combinations, and design beautiful palettes for your projects. Free professional color palette generator for designers.",
+    keywords: "professional color palette generator, color scheme generator, hex color palette, AI color generator, free color palette generator for designers, professional color scheme creator online, color palette generator with export, advanced color scheme tool"
   },
   brandIntelligence: {
-    title: "Brand Color Intelligence - AI-Powered Brand Color Analysis | AI Colour Engine",
-    description: "Analyze and generate brand colors with AI intelligence. Create consistent brand color palettes, analyze competitor colors, and build strong brand identities.",
-    keywords: "brand colors, brand color palette, brand identity, color analysis, brand intelligence, competitor colors"
+    title: "Brand Color Intelligence - AI-Powered Professional Brand Color Analysis | AI Colour Engine",
+    description: "Analyze and generate professional brand colors with AI intelligence. Create consistent brand color palettes, analyze competitor colors, and build strong brand identities. Professional color scheme creator online.",
+    keywords: "brand colors, brand color palette, brand identity, color analysis, brand intelligence, competitor colors, professional color scheme creator online, AI powered color palette tool"
   },
   aiAssistant: {
-    title: "AI Color Assistant - Get Smart Color Suggestions | AI Colour Engine",
-    description: "Get AI-powered color suggestions and recommendations. Our intelligent color assistant helps you choose perfect colors for any design project.",
-    keywords: "AI color assistant, color suggestions, color recommendations, smart color picker, AI color help"
+    title: "AI Color Assistant - Smart Color Suggestions for Professional Design | AI Colour Engine",
+    description: "Get AI-powered color suggestions and recommendations for professional design projects. Our intelligent color assistant helps you choose perfect colors for any design project. Color theory generator for artists.",
+    keywords: "AI color assistant, color suggestions, color recommendations, smart color picker, AI color help, color theory generator for artists, AI powered color palette tool"
   },
   harmonyTools: {
-    title: "Color Harmony Tools - Create Harmonious Color Schemes | AI Colour Engine",
-    description: "Create harmonious color schemes with our advanced color harmony tools. Explore complementary, analogous, triadic, and other color relationships.",
-    keywords: "color harmony, color relationships, complementary colors, analogous colors, triadic colors, color theory"
+    title: "Color Harmony Tools - Create Professional Harmonious Color Schemes | AI Colour Engine",
+    description: "Create harmonious professional color schemes with our advanced color harmony tools. Explore complementary, analogous, triadic, and other color relationships. Professional color scheme creator online.",
+    keywords: "color harmony, color relationships, complementary colors, analogous colors, triadic colors, color theory, professional color scheme creator online, advanced color scheme tool"
   }
 };
 

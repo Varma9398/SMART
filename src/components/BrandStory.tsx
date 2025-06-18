@@ -11,10 +11,10 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
     <Card className="glass-card overflow-hidden">
       <CardHeader className="text-center pb-4">
         <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          AI-Powered Color Intelligence Platform
+          Professional Color Palette Generator with AI Intelligence
         </CardTitle>
         <p className="text-sm text-muted-foreground mt-2">
-          Transform any image into conversion-optimized color schemes with context-aware AI assistance
+          Free color palette generator for designers. Create hex color palettes, generate professional color schemes, and export color palettes for design with AI-powered color intelligence.
         </p>
       </CardHeader>
       <CardContent className="space-y-8">
@@ -56,15 +56,15 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
 
         {/* Unique Value Propositions */}
         <div className="border-t border-border/20 pt-6">
-          <h3 className="text-lg font-semibold text-center mb-6">Unique Value Propositions</h3>
+          <h3 className="text-lg font-semibold text-center mb-6">Advanced Color Scheme Tool Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* AI Color Assistant */}
             <div className="text-center space-y-2">
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500/10">
                 <MessageSquare className="w-5 h-5 text-green-500" />
               </div>
-              <h4 className="font-medium text-sm">AI Color Assistant</h4>
-              <p className="text-xs text-muted-foreground">Natural language color queries</p>
+              <h4 className="font-medium text-sm">Smart Color Palette Generator</h4>
+              <p className="text-xs text-muted-foreground">AI-powered color suggestions</p>
             </div>
 
             {/* Performance-Based Palettes */}
@@ -72,8 +72,8 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange-500/10">
                 <Target className="w-5 h-5 text-orange-500" />
               </div>
-              <h4 className="font-medium text-sm">Performance-Based</h4>
-              <p className="text-xs text-muted-foreground">Colors optimized for conversion</p>
+              <h4 className="font-medium text-sm">Professional Color Palettes</h4>
+              <p className="text-xs text-muted-foreground">Hex color palette creation</p>
             </div>
 
             {/* Brand Intelligence */}
@@ -81,8 +81,8 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10">
                 <Palette className="w-5 h-5 text-blue-500" />
               </div>
-              <h4 className="font-medium text-sm">Brand Intelligence</h4>
-              <p className="text-xs text-muted-foreground">Logo-aware color generation</p>
+              <h4 className="font-medium text-sm">Professional Color Scheme Creator</h4>
+              <p className="text-xs text-muted-foreground">Brand-aware color generation</p>
             </div>
 
             {/* Accessibility-First */}
@@ -90,8 +90,8 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/10">
                 <Eye className="w-5 h-5 text-purple-500" />
               </div>
-              <h4 className="font-medium text-sm">Accessibility-First</h4>
-              <p className="text-xs text-muted-foreground">WCAG 2.1 AAA compliance</p>
+              <h4 className="font-medium text-sm">Color Theory Generator for Artists</h4>
+              <p className="text-xs text-muted-foreground">Educational color insights</p>
             </div>
 
             {/* Designer Workflow */}
@@ -99,8 +99,8 @@ const BrandStory: React.FC<BrandStoryProps> = ({ onStartCreating }) => {
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500/10">
                 <Workflow className="w-5 h-5 text-indigo-500" />
               </div>
-              <h4 className="font-medium text-sm">Designer Workflow</h4>
-              <p className="text-xs text-muted-foreground">Integrates with real processes</p>
+              <h4 className="font-medium text-sm">Export Color Palettes for Design</h4>
+              <p className="text-xs text-muted-foreground">Multiple format support</p>
             </div>
           </div>
         </div>

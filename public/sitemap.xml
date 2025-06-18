@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
   <!-- Main Page -->
   <url>
     <loc>https://varma9398.github.io/SMART/</loc>
-    <lastmod>2024-01-15</lastmod>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://varma9398.github.io/SMART/og-image.png</image:loc>
+      <image:title>AI Colour Engine - Professional Color Palette Generator</image:title>
+      <image:caption>Free professional color palette generator with AI-powered color intelligence</image:caption>
+    </image:image>
   </url>
   
   <!-- Color Palette Generator -->
   <url>
-    <loc>https://varma9398.github.io/SMART/#/palette-generator</loc>
-    <lastmod>2024-01-15</lastmod>
+    <loc>https://varma9398.github.io/SMART/#palette-generator</loc>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://varma9398.github.io/SMART/palette-generator.png</image:loc>
+      <image:title>Professional Color Palette Generator</image:title>
+      <image:caption>Create beautiful color schemes with hex color palette generation</image:caption>
+    </image:image>
   </url>
   
   <!-- Color Scheme Generator -->
@@ -30,26 +41,41 @@
   
   <!-- Brand Intelligence -->
   <url>
-    <loc>https://varma9398.github.io/SMART/#/brand-intelligence</loc>
-    <lastmod>2024-01-15</lastmod>
+    <loc>https://varma9398.github.io/SMART/#brand-intelligence</loc>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://varma9398.github.io/SMART/brand-intelligence.png</image:loc>
+      <image:title>Brand Color Intelligence</image:title>
+      <image:caption>AI-powered professional brand color analysis and generation</image:caption>
+    </image:image>
   </url>
   
   <!-- Color Harmony Tools -->
   <url>
-    <loc>https://varma9398.github.io/SMART/#/harmony</loc>
-    <lastmod>2024-01-15</lastmod>
+    <loc>https://varma9398.github.io/SMART/#harmony-tools</loc>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://varma9398.github.io/SMART/harmony-tools.png</image:loc>
+      <image:title>Color Harmony Tools</image:title>
+      <image:caption>Advanced color scheme tool for professional harmonious palettes</image:caption>
+    </image:image>
   </url>
   
   <!-- AI Color Assistant -->
   <url>
-    <loc>https://varma9398.github.io/SMART/#/ai-assistant</loc>
-    <lastmod>2024-01-15</lastmod>
+    <loc>https://varma9398.github.io/SMART/#ai-assistant</loc>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://varma9398.github.io/SMART/ai-assistant.png</image:loc>
+      <image:title>AI Color Assistant</image:title>
+      <image:caption>Smart color suggestions for professional design projects</image:caption>
+    </image:image>
   </url>
   
   <!-- Color Tools -->
@@ -74,6 +100,19 @@
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  
+  <!-- Export -->
+  <url>
+    <loc>https://varma9398.github.io/SMART/#export</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://varma9398.github.io/SMART/export.png</image:loc>
+      <image:title>Export Color Palettes</image:title>
+      <image:caption>Export color palettes for design in multiple formats</image:caption>
+    </image:image>
   </url>
   
 </urlset> 

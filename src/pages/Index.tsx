@@ -294,7 +294,7 @@ const Index = () => {
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 AI Colour Engine
               </h1>
-              <p className="text-sm text-muted-foreground">AI-Powered Color Intelligence Platform</p>
+              <p className="text-sm text-muted-foreground">Professional Color Palette Generator & AI Color Scheme Creator</p>
             </div>
           </div>
         </div>
@@ -413,10 +413,11 @@ const Index = () => {
         <div className="text-center text-sm text-muted-foreground">
           <p className="text-lg font-semibold mb-2">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI Colour Engine</span>
-            {' '} - Transform any image into conversion-optimized color schemes
+            {' '} - Free Professional Color Palette Generator with AI Intelligence
           </p>
           <p className="text-sm text-muted-foreground/70">
-            Context-aware AI assistance for performance-based palettes
+            Create hex color palettes, generate professional color schemes, and export color palettes for design. 
+            Advanced color scheme tool for designers and artists.
           </p>
         </div>
       </footer>
