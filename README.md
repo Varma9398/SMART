@@ -48,12 +48,65 @@ This project is built with:
 
 ## How can I deploy this project?
 
+### 🚀 Multiple Deployment Options Available!
+
+This project is configured to deploy on **both GitHub Pages and Vercel**. See the complete guide in [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).
+
+### Option 1: Deploy with Lovable
+
 Simply open [Lovable](https://lovable.dev/projects/48d3d6e6-27d0-4416-98ac-eb8d28639876) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
+### Option 2: Deploy with GitHub Pages (Traditional)
 
-Yes, you can!
+**Quick Deploy:**
+```bash
+npm run deploy
+```
 
+**Access your site:** `https://varma9398.github.io/SMART`
+
+### Option 3: Deploy with Vercel (Recommended)
+
+**Quick Deploy:**
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign up/login
+3. Click "New Project" and import your GitHub repository
+4. Vercel will auto-detect the Vite configuration
+5. Click "Deploy" - your app will be live in minutes!
+
+**Access your site:** `https://your-project-name.vercel.app`
+
+### Platform Comparison
+
+| Feature | GitHub Pages | Vercel |
+|---------|-------------|--------|
+| **Setup** | Manual | Automatic |
+| **Deployments** | Manual (`npm run deploy`) | Automatic (on push) |
+| **Performance** | Good | Excellent (CDN) |
+| **Custom Domains** | ✅ | ✅ |
+| **HTTPS** | ✅ | ✅ |
+| **Preview Deployments** | ❌ | ✅ |
+| **Analytics** | ❌ | ✅ |
+
+## Can I connect a custom domain to my project?
+
+### Lovable
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+### GitHub Pages
+1. Go to repository Settings → Pages
+2. Add custom domain
+3. Configure DNS records
+4. Enable HTTPS
+
+### Vercel
+1. Go to your project in Vercel dashboard
+2. Navigate to "Settings" → "Domains"
+3. Add your custom domain
+4. Configure DNS records as instructed by Vercel
+
+## 📚 Detailed Deployment Guide
+
+For comprehensive deployment instructions, troubleshooting, and advanced configuration, see [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).

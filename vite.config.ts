@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: process.env.NODE_ENV === 'production' ? '/SMART/' : '/SPP/',
+  base: process.env.VERCEL ? '/' : (process.env.NODE_ENV === 'production' ? '/SMART/' : '/SPP/'),
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
