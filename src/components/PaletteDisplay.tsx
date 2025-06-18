@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Save, Trash2, Eye, EyeOff } from 'lucide-react';
+import { Download, Save, Trash2, Eye, EyeOff, Palette, Sparkles } from 'lucide-react';
 import { ColorInfo, ColorPalette, exportPalette, savePalette } from '@/utils/colorUtils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -176,10 +176,13 @@ const PaletteDisplay: React.FC<PaletteDisplayProps> = ({
 
   if (colors.length === 0) {
     return (
-      <Card className="glass-card">
-        <CardContent className="p-8 text-center">
-          <p className="text-muted-foreground">No colors to display</p>
-          <p className="text-sm text-muted-foreground mt-2">
+      <Card className="premium-glass hover-lift">
+        <CardContent className="p-12 text-center">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-muted/20 to-secondary/20 flex items-center justify-center">
+            <Palette className="w-10 h-10 text-muted-foreground" />
+          </div>
+          <h3 className="text-xl font-bold mb-2 gradient-text-secondary">No Colors to Display</h3>
+          <p className="text-muted-foreground">
             Upload an image or generate a harmony to see colors here
           </p>
         </CardContent>
@@ -188,28 +191,36 @@ const PaletteDisplay: React.FC<PaletteDisplayProps> = ({
   }
 
   return (
-    <Card className="glass-card">
+    <Card className="premium-glass hover-lift">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl">
-            {harmony.charAt(0).toUpperCase() + harmony.slice(1)} Palette
-          </CardTitle>
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <Palette className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl font-bold gradient-text">
+                {harmony.charAt(0).toUpperCase() + harmony.slice(1)} Palette
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                {colors.length} color{colors.length !== 1 ? 's' : ''} • {harmony} harmony
+              </p>
+            </div>
+          </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setShowDetails(!showDetails)}
+            className="hover:bg-secondary/50 rounded-xl"
           >
-            {showDetails ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            {showDetails ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </Button>
         </div>
-        <p className="text-sm text-muted-foreground">
-          {colors.length} color{colors.length !== 1 ? 's' : ''} • {harmony} harmony
-        </p>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-8">
         {/* Color Swatches */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {colors.map((color, index) => (
             <ColorSwatch
               key={`${color.hex}-${index}`}
@@ -221,16 +232,19 @@ const PaletteDisplay: React.FC<PaletteDisplayProps> = ({
         </div>
 
         {/* Color Values as Text */}
-        <div className="bg-secondary/50 rounded-lg p-4">
-          <h4 className="text-sm font-medium text-muted-foreground mb-2">Color Values</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm font-mono">
+        <div className="bg-gradient-to-br from-secondary/30 to-secondary/10 rounded-2xl p-6 border border-border/30">
+          <h4 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-primary" />
+            Color Values
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-mono">
             {colors.map((color, index) => (
-              <div key={`${color.hex}-${index}`} className="flex items-center space-x-2">
+              <div key={`${color.hex}-${index}`} className="flex items-center space-x-3 p-2 rounded-lg bg-background/50">
                 <div
-                  className="w-4 h-4 rounded border border-border/20"
+                  className="w-6 h-6 rounded-lg border-2 border-border/30 shadow-sm"
                   style={{ backgroundColor: color.hex }}
                 />
-                <span>{color.hex}</span>
+                <span className="font-semibold">{color.hex}</span>
               </div>
             ))}
           </div>
@@ -238,41 +252,46 @@ const PaletteDisplay: React.FC<PaletteDisplayProps> = ({
 
         {/* Controls */}
         {isEditable && (
-          <div className="space-y-4">
-            <Input
-              placeholder="Enter palette name"
-              value={paletteName}
-              onChange={(e) => setPaletteName(e.target.value)}
-              className="w-full"
-            />
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-foreground">Palette Name</label>
+              <Input
+                placeholder="Enter palette name"
+                value={paletteName}
+                onChange={(e) => setPaletteName(e.target.value)}
+                className="w-full rounded-xl border-border/50 focus:border-primary/50 transition-colors duration-200"
+              />
+            </div>
 
-            <div className="flex flex-col sm:flex-row gap-2">
-              <div className="flex gap-2 flex-1">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button 
+                onClick={handleSave} 
+                className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                disabled={colors.length === 0}
+              >
+                <Save className="w-5 h-5 mr-2" />
+                Save Palette
+              </Button>
+
+              <Button 
+                onClick={() => setShowExportModal(true)} 
+                variant="outline" 
+                className="flex-1 border-border/50 hover:border-primary/50 py-3 rounded-xl transition-all duration-300 hover:scale-105"
+                disabled={colors.length === 0}
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Export
+              </Button>
+
+              {paletteId && onDelete && (
                 <Button 
-                  onClick={handleSave} 
-                  className="btn-primary flex-1"
-                  disabled={colors.length === 0}
+                  onClick={handleDelete} 
+                  variant="destructive"
+                  className="px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105"
                 >
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Palette
+                  <Trash2 className="w-5 h-5" />
                 </Button>
-
-                <Button 
-                  onClick={() => setShowExportModal(true)} 
-                  variant="outline" 
-                  className="flex-1"
-                  disabled={colors.length === 0}
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
-                </Button>
-
-                {paletteId && onDelete && (
-                  <Button onClick={handleDelete} variant="destructive">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                )}
-              </div>
+              )}
             </div>
           </div>
         )}

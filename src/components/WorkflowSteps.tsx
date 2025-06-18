@@ -11,7 +11,8 @@ import {
   CheckCircle,
   Circle,
   Clock,
-  Brain
+  Brain,
+  ArrowRight
 } from 'lucide-react';
 
 interface WorkflowStep {
@@ -91,32 +92,34 @@ const WorkflowSteps: React.FC<WorkflowStepsProps> = ({ currentStep, onStepClick 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-5 h-5 text-green-500" />;
       case 'active':
-        return <Clock className="w-4 h-4 text-blue-500" />;
+        return <Clock className="w-5 h-5 text-primary" />;
       default:
-        return <Circle className="w-4 h-4 text-muted-foreground" />;
+        return <Circle className="w-5 h-5 text-muted-foreground" />;
     }
   };
 
   const getStepClasses = (status: string, isActive: boolean) => {
-    const baseClasses = "relative p-4 rounded-lg border transition-all duration-300 cursor-pointer";
+    const baseClasses = "relative p-6 rounded-2xl border transition-all duration-300 cursor-pointer group hover-lift";
     
     if (status === 'completed') {
-      return `${baseClasses} bg-green-500/10 border-green-500/30 hover:bg-green-500/20`;
+      return `${baseClasses} bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-500/30 hover:from-green-500/20 hover:to-emerald-500/20`;
     } else if (status === 'active') {
-      return `${baseClasses} bg-blue-500/10 border-blue-500/30 ring-2 ring-blue-500/20`;
+      return `${baseClasses} bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30 ring-2 ring-primary/20 shadow-lg`;
     } else {
-      return `${baseClasses} bg-background/50 border-border/30 hover:bg-background/80`;
+      return `${baseClasses} bg-gradient-to-br from-background/50 to-secondary/30 border-border/30 hover:from-background/80 hover:to-secondary/50`;
     }
   };
 
   return (
-    <Card className="glass-card">
+    <Card className="premium-glass hover-lift">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-primary" />
-          Enhanced Workflow
+        <CardTitle className="text-2xl font-bold flex items-center gap-3">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-primary" />
+          </div>
+          Enhanced AI Workflow
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -127,38 +130,63 @@ const WorkflowSteps: React.FC<WorkflowStepsProps> = ({ currentStep, onStepClick 
               className={getStepClasses(step.status, currentStep === step.id)}
               onClick={() => onStepClick?.(step.id)}
             >
-              <div className="flex items-start gap-4">
-                <div className="flex items-center gap-2">
+              <div className="flex items-start gap-6">
+                <div className="flex items-center gap-3">
                   {getStatusIcon(step.status)}
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+                  <div className={`flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 ${
+                    step.status === 'completed' 
+                      ? 'bg-green-500/20 text-green-500' 
+                      : step.status === 'active'
+                      ? 'bg-gradient-to-br from-primary/20 to-accent/20 text-primary'
+                      : 'bg-secondary/50 text-muted-foreground'
+                  }`}>
                     {step.icon}
                   </div>
                 </div>
                 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-sm">{step.title}</h3>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className={`font-bold text-lg transition-colors duration-300 ${
+                      step.status === 'active' ? 'gradient-text' : 'text-foreground'
+                    }`}>
+                      {step.title}
+                    </h3>
                     {step.status === 'active' && (
-                      <Badge variant="secondary" className="text-xs">
+                      <Badge className="bg-gradient-to-r from-primary to-accent text-white border-0 px-3 py-1 rounded-full text-xs font-semibold">
                         Active
                       </Badge>
                     )}
+                    {step.status === 'completed' && (
+                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 px-3 py-1 rounded-full text-xs font-semibold">
+                        Complete
+                      </Badge>
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
                     {step.description}
                   </p>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-2">
                     {step.features.map((feature, featureIndex) => (
                       <Badge 
                         key={featureIndex} 
                         variant="outline" 
-                        className="text-xs"
+                        className={`text-xs px-3 py-1 rounded-lg border-border/50 ${
+                          step.status === 'active' ? 'border-primary/30 text-primary' :
+                          step.status === 'completed' ? 'border-green-500/30 text-green-500' :
+                          'text-muted-foreground'
+                        }`}
                       >
                         {feature}
                       </Badge>
                     ))}
                   </div>
                 </div>
+                
+                {step.status === 'active' && (
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-white">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                )}
               </div>
             </div>
           ))}

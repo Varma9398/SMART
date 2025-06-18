@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Upload, MessageSquare, Lightbulb, Sparkles } from 'lucide-react';
+import { Upload, MessageSquare, Lightbulb, Sparkles, Image as ImageIcon, Wand2 } from 'lucide-react';
 
 interface ImageUploadProps {
   onImageUpload: (imageData: ImageData, fileName: string, base64Data: string) => void;
@@ -83,47 +83,58 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   };
 
   return (
-    <Card className="glass-card">
+    <Card className="premium-glass hover-lift">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold flex items-center gap-2">
-          <Lightbulb className="w-5 h-5 text-primary" />
-          Inspire
+        <CardTitle className="text-xl font-bold flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+            <Lightbulb className="w-5 h-5 text-primary" />
+          </div>
+          Inspire & Create
         </CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="upload" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="upload" className="flex items-center gap-2">
-              <Upload className="w-4 h-4" />
+          <TabsList className="grid w-full grid-cols-2 bg-secondary/50 p-1 rounded-xl">
+            <TabsTrigger 
+              value="upload" 
+              className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-lg transition-all duration-200"
+            >
+              <ImageIcon className="w-4 h-4" />
               Upload Image
             </TabsTrigger>
-            <TabsTrigger value="vision" className="flex items-center gap-2">
-              <MessageSquare className="w-4 h-4" />
+            <TabsTrigger 
+              value="vision" 
+              className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-lg transition-all duration-200"
+            >
+              <Wand2 className="w-4 h-4" />
               Describe Vision
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="upload" className="mt-4">
+          <TabsContent value="upload" className="mt-6">
             <div
-              className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+              className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-300 group ${
                 dragActive 
-                  ? 'border-primary bg-primary/5' 
-                  : 'border-border hover:border-primary/50'
+                  ? 'border-primary bg-primary/10 scale-105' 
+                  : 'border-border/50 hover:border-primary/50 hover:bg-primary/5'
               }`}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
               onDrop={handleDrop}
             >
-              <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg font-semibold mb-2">Upload Your Image</h3>
-              <p className="text-muted-foreground mb-4">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <Upload className="w-10 h-10 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-3 gradient-text">Upload Your Image</h3>
+              <p className="text-muted-foreground mb-6 text-lg">
                 Drag and drop your image here, or click to browse
               </p>
               <Button 
                 onClick={() => fileInputRef.current?.click()}
-                className="bg-gradient-to-r from-primary to-accent"
+                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold px-8 py-3 rounded-xl text-base transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
+                <ImageIcon className="w-5 h-5 mr-2" />
                 Choose File
               </Button>
               <input
@@ -133,15 +144,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 onChange={handleFileInput}
                 className="hidden"
               />
+              <p className="text-xs text-muted-foreground mt-4">
+                Supports JPG, PNG, GIF, WebP up to 10MB
+              </p>
             </div>
           </TabsContent>
 
-          <TabsContent value="vision" className="mt-4">
-            <div className="space-y-4">
-              <div className="text-center mb-4">
-                <MessageSquare className="w-12 h-12 mx-auto mb-4 text-primary" />
-                <h3 className="text-lg font-semibold mb-2">Describe Your Vision</h3>
-                <p className="text-muted-foreground">
+          <TabsContent value="vision" className="mt-6">
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
+                  <Wand2 className="w-10 h-10 text-accent" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 gradient-text">Describe Your Vision</h3>
+                <p className="text-muted-foreground text-lg">
                   Use natural language to describe the color palette you want to create
                 </p>
               </div>
@@ -150,37 +166,43 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 placeholder="e.g., 'Create a warm, professional color palette for a tech startup website that conveys trust and innovation. I want colors that work well for both light and dark modes.'"
                 value={visionDescription}
                 onChange={(e) => setVisionDescription(e.target.value)}
-                className="min-h-[120px] resize-none"
+                className="min-h-[140px] resize-none text-base p-4 rounded-xl border-border/50 focus:border-primary/50 transition-colors duration-200"
               />
               
-              <div className="space-y-2">
-                <p className="text-sm font-medium">Example prompts:</p>
-                <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground">
-                    • "Earthy, organic palette for a sustainable fashion brand"
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    • "Bold, energetic colors for a fitness app that motivates users"
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    • "Sophisticated, minimalist palette for a luxury real estate website"
-                  </p>
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-foreground">Example prompts:</p>
+                <div className="space-y-2">
+                  <div className="p-3 rounded-lg bg-secondary/30 border border-border/30">
+                    <p className="text-sm text-muted-foreground">
+                      "Earthy, organic palette for a sustainable fashion brand"
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-secondary/30 border border-border/30">
+                    <p className="text-sm text-muted-foreground">
+                      "Bold, energetic colors for a fitness app that motivates users"
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-secondary/30 border border-border/30">
+                    <p className="text-sm text-muted-foreground">
+                      "Sophisticated, minimalist palette for a luxury real estate website"
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <Button 
                 onClick={handleVisionSubmit}
                 disabled={!visionDescription.trim() || isProcessing}
-                className="w-full bg-gradient-to-r from-primary to-accent"
+                className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold py-4 rounded-xl text-base transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isProcessing ? (
                   <>
-                    <Sparkles className="w-4 h-4 mr-2 animate-spin" />
+                    <Sparkles className="w-5 h-5 mr-2 animate-spin" />
                     Processing Vision...
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4 mr-2" />
+                    <Sparkles className="w-5 h-5 mr-2" />
                     Generate from Vision
                   </>
                 )}

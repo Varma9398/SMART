@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Palette, Upload, Download, Save } from 'lucide-react';
+import { Palette, Upload, Download, Save, Sparkles, Brain, Target, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ImageUpload from '@/components/ImageUpload';
 import PaletteDisplay from '@/components/PaletteDisplay';
@@ -47,7 +47,10 @@ const Index = () => {
 
   // Check if user is new on component mount
   useEffect(() => {
-    setShowWelcomePopup(true);
+    const hasSeenWelcome = localStorage.getItem('ai_colour_engine_welcome_shown') === 'true';
+    if (!hasSeenWelcome) {
+      setShowWelcomePopup(true);
+    }
   }, []);
 
   // Load image history and saved palettes on component mount
@@ -206,20 +209,11 @@ const Index = () => {
   };
 
   const handlePaletteSave = (palette: ColorPalette) => {
-    // Instead of calling savePalette directly here, update the state
-    setSavedPalettes(prevPalettes => {
-      const existingIndex = prevPalettes.findIndex(p => p.id === palette.id);
-      if (existingIndex > -1) {
-        // Update existing palette
-        const updated = [...prevPalettes];
-        updated[existingIndex] = palette;
-        return updated;
-      } else {
-        // Add new palette to the beginning
-        return [palette, ...prevPalettes];
-      }
-    });
-    console.log('Palette saved successfully (via state update):', palette.name); // Debug log
+    console.log('Saving palette:', palette.name); // Debug log
+    const updatedPalettes = [...savedPalettes, palette];
+    setSavedPalettes(updatedPalettes);
+    localStorage.setItem('savedPalettes', JSON.stringify(updatedPalettes));
+    console.log('Palette saved successfully. Total saved palettes:', updatedPalettes.length);
   };
 
   const handleVisionDescription = async (description: string) => {
@@ -276,149 +270,302 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-bg p-4">
+    <div className="min-h-screen gradient-bg">
       {/* Welcome Popup */}
       <WelcomePopup 
         isOpen={showWelcomePopup} 
         onClose={() => setShowWelcomePopup(false)} 
       />
 
-      {/* Header */}
-      <header className="max-w-7xl mx-auto mb-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center glass-card">
-              <Palette className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                AI Colour Engine
-              </h1>
-              <p className="text-sm text-muted-foreground">Professional Color Palette Generator & AI Color Scheme Creator</p>
+      {/* Enhanced Header */}
+      <header className="relative z-10 py-8 pl-4">
+        <div>
+          <div className="flex items-center justify-start">
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center premium-glass glow">
+                  <Palette className="w-7 h-7 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-2.5 h-2.5 text-white" />
+                </div>
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold gradient-text">
+                  AI Colour Engine
+                </h1>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Professional Color Palette Generator with AI Intelligence
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
+      {/* Feature Bar - Unique Value Propositions */}
+      <section className="w-full flex justify-center mb-8">
+        <div className="w-full max-w-7xl px-2">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2 bg-gradient-to-r from-background/60 to-accent/10 rounded-2xl shadow-lg border border-border/30 py-4 px-2 md:px-6 premium-glass">
+            {/* AI Color Assistant (Button) */}
+            <button
+              type="button"
+              className="flex flex-col items-center md:items-start text-center md:text-left flex-1 min-w-[160px] transition hover:bg-primary/10 active:scale-95 rounded-xl py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              onClick={() => {
+                const el = document.getElementById('creative-tools');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="font-bold text-base md:text-lg gradient-text">AI Color Assistant</span>
+              <span className="text-xs md:text-sm text-muted-foreground">Natural language color queries</span>
+            </button>
+            {/* Performance-Based (not clickable) */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1 min-w-[160px]">
+              <span className="font-bold text-base md:text-lg gradient-text">Performance-Based</span>
+              <span className="text-xs md:text-sm text-muted-foreground">Colors optimized for conversion</span>
+            </div>
+            {/* Brand Intelligence (Button) */}
+            <button
+              type="button"
+              className="flex flex-col items-center md:items-start text-center md:text-left flex-1 min-w-[160px] transition hover:bg-primary/10 active:scale-95 rounded-xl py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              onClick={() => {
+                const el = document.getElementById('ai-intelligence-hub');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="font-bold text-base md:text-lg gradient-text">Brand Intelligence</span>
+              <span className="text-xs md:text-sm text-muted-foreground">Logo-aware color generation</span>
+            </button>
+            {/* Accessibility-First (not clickable) */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1 min-w-[160px]">
+              <span className="font-bold text-base md:text-lg gradient-text">Accessibility-First</span>
+              <span className="text-xs md:text-sm text-muted-foreground">WCAG 2.1 AAA compliance</span>
+            </div>
+            {/* Designer Workflow (not clickable) */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1 min-w-[160px]">
+              <span className="font-bold text-base md:text-lg gradient-text">Designer Workflow</span>
+              <span className="text-xs md:text-sm text-muted-foreground">Integrates with real processes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main content */}
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Brand Story Section */}
-        <BrandStory onStartCreating={handleStartCreating} />
+      <div className="max-w-full mx-auto px-8 pb-12 space-y-8">
+        {/* Hero Section with Brand Story */}
+        <section className="relative">
+          <BrandStory onStartCreating={handleStartCreating} />
+        </section>
 
-        {/* Workflow Steps */}
-        <WorkflowSteps 
-          currentStep={currentWorkflowStep} 
-          onStepClick={handleWorkflowStepClick}
-        />
+        {/* Feature Panels */}
+        {/* Workflow Steps Panel */}
+        <section className="relative">
+          <WorkflowSteps 
+            currentStep={currentWorkflowStep} 
+            onStepClick={handleWorkflowStepClick}
+          />
+        </section>
 
-        {/* Spacer to separate brand story from tools */}
-        <div className="h-8"></div>
-
-        {/* Brand Intelligence System - Now above upload sections */}
-        <div className="glass-card p-6 brand-intelligence-section">
+        {/* AI Intelligence Hub Panel */}
+        <section id="ai-intelligence-hub" className="premium-glass rounded-3xl p-8 brand-intelligence-section">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 mb-4">
+              <Brain className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="text-2xl font-bold gradient-text mb-2">
+              AI Intelligence Hub
+            </h2>
+            <p className="text-muted-foreground">
+              Let AI understand your brand and create intelligent color strategies
+            </p>
+          </div>
           <BrandIntelligence 
             onBrandCreated={(brand: BrandProfile) => {
               console.log('Brand created:', brand.name);
-              // You can add additional logic here when a brand is created
             }}
           />
-        </div>
+        </section>
 
-        {/* Top row - Tools (Image Upload and Image History) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 upload-section">
-          <ImageUpload 
-            onImageUpload={handleImageUpload} 
-            onImageChange={handleImageChange}
-            onVisionDescription={handleVisionDescription}
-          />
-          <ImageHistory
-            key={JSON.stringify(imageHistory)}
-            history={imageHistory}
-            onSelectImage={handleHistoryImageSelect}
-            onDeleteImage={handleDeleteImage}
-            currentDisplayedImageId={currentDisplayedImageId}
-          />
-        </div>
-
-        {/* AI Analysis Results - Now below upload sections */}
-        {aiAnalysis && (
-          <div className="my-6">
-            <div className="glass-card p-6 mb-4">
-              <h3 className="text-lg font-bold mb-2 text-primary">AI Color Intelligence Analysis</h3>
-              {aiAnalysis.mood && <p><b>Mood:</b> {aiAnalysis.mood}</p>}
-              {aiAnalysis.dominantEmotions && <p><b>Emotions:</b> {aiAnalysis.dominantEmotions.join(', ')}</p>}
-              {aiAnalysis.colorHarmony && <p><b>Harmony:</b> {aiAnalysis.colorHarmony}</p>}
-              {aiAnalysis.suggestedPalette && <p><b>Suggested Palette:</b> {aiAnalysis.suggestedPalette.join(', ')}</p>}
-              {aiAnalysis.industry && <p><b>Industry:</b> {aiAnalysis.industry}</p>}
-              {aiAnalysis.emotions && <p><b>Emotions:</b> {aiAnalysis.emotions.join(', ')}</p>}
-              {aiAnalysis.context && <p><b>Context:</b> {aiAnalysis.context.join(', ')}</p>}
-              {aiAnalysis.suggestedColors && <p><b>Suggested Colors:</b> {aiAnalysis.suggestedColors.join(', ')}</p>}
+        {/* Creative Tools Panel */}
+        <section id="creative-tools" className="relative">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 mb-4">
+              <Zap className="w-8 h-8 text-accent" />
             </div>
-            {aiTrends && (
-              <div className="glass-card p-6 mb-4">
-                <h3 className="text-lg font-bold mb-2 text-accent">AI Trend Analysis</h3>
-                <p><b>Current Trends:</b> {aiTrends.currentTrends.join(', ')}</p>
-                <p><b>Predicted Trends:</b> {aiTrends.predictedTrends.join(', ')}</p>
-                <p><b>Seasonal Influences:</b> {aiTrends.seasonalInfluences.join(', ')}</p>
-                <p><b>Market Factors:</b> {aiTrends.marketFactors.join(', ')}</p>
-              </div>
-            )}
-            {aiPerformance && (
-              <div className="glass-card p-6">
-                <h3 className="text-lg font-bold mb-2 text-green-500">Performance Optimization</h3>
-                <p><b>Conversion Rate:</b> {(aiPerformance.conversionRate * 100).toFixed(1)}%</p>
-                <p><b>Accessibility Score:</b> {(aiPerformance.accessibilityScore * 100).toFixed(1)}%</p>
-                <p><b>Brand Alignment:</b> {(aiPerformance.brandAlignment * 100).toFixed(1)}%</p>
-                <p><b>Trend Relevance:</b> {(aiPerformance.trendRelevance * 100).toFixed(1)}%</p>
-              </div>
-            )}
+            <h2 className="text-2xl font-bold gradient-text mb-2">
+              Creative Tools
+            </h2>
+            <p className="text-muted-foreground">
+              Upload images or describe your vision to generate professional color palettes
+            </p>
           </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <ImageUpload 
+              onImageUpload={handleImageUpload} 
+              onImageChange={handleImageChange}
+              onVisionDescription={handleVisionDescription}
+            />
+            <ImageHistory
+              key={JSON.stringify(imageHistory)}
+              history={imageHistory}
+              onSelectImage={handleHistoryImageSelect}
+              onDeleteImage={handleDeleteImage}
+              currentDisplayedImageId={currentDisplayedImageId}
+            />
+          </div>
+        </section>
+
+        {/* AI Analysis Results */}
+        {aiAnalysis && (
+          <section className="space-y-6">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500/20 to-blue-500/20 mb-4">
+                <Target className="w-8 h-8 text-green-500" />
+              </div>
+              <h2 className="text-2xl font-bold gradient-text mb-2">
+                AI Analysis Results
+              </h2>
+              <p className="text-muted-foreground">
+                Intelligent insights and recommendations for your color strategy
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <Card className="premium-glass hover-lift">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Brain className="w-5 h-5 text-primary" />
+                    Color Intelligence
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {aiAnalysis.mood && <p><span className="font-medium">Mood:</span> {aiAnalysis.mood}</p>}
+                  {aiAnalysis.dominantEmotions && <p><span className="font-medium">Emotions:</span> {aiAnalysis.dominantEmotions.join(', ')}</p>}
+                  {aiAnalysis.colorHarmony && <p><span className="font-medium">Harmony:</span> {aiAnalysis.colorHarmony}</p>}
+                  {aiAnalysis.industry && <p><span className="font-medium">Industry:</span> {aiAnalysis.industry}</p>}
+                </CardContent>
+              </Card>
+
+              {aiTrends && (
+                <Card className="premium-glass hover-lift">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-accent" />
+                      Trend Analysis
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p><span className="font-medium">Current Trends:</span> {aiTrends.currentTrends.join(', ')}</p>
+                    <p><span className="font-medium">Predicted Trends:</span> {aiTrends.predictedTrends.join(', ')}</p>
+                    <p><span className="font-medium">Seasonal Influences:</span> {aiTrends.seasonalInfluences.join(', ')}</p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {aiPerformance && (
+                <Card className="premium-glass hover-lift">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Target className="w-5 h-5 text-green-500" />
+                      Performance Metrics
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p><span className="font-medium">Conversion Rate:</span> {(aiPerformance.conversionRate * 100).toFixed(1)}%</p>
+                    <p><span className="font-medium">Accessibility Score:</span> {(aiPerformance.accessibilityScore * 100).toFixed(1)}%</p>
+                    <p><span className="font-medium">Brand Alignment:</span> {(aiPerformance.brandAlignment * 100).toFixed(1)}%</p>
+                    <p><span className="font-medium">Trend Relevance:</span> {(aiPerformance.trendRelevance * 100).toFixed(1)}%</p>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </section>
         )}
 
-        {/* All Palettes Display - Shows when image is uploaded */}
+        {/* All Palettes Display */}
         {hasImage && (
-          <AllPalettesDisplay 
-            palettes={allPalettes} 
-            onPaletteSelect={handlePaletteSelect}
-          />
+          <section>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold gradient-text mb-2">
+                Generated Palettes
+              </h2>
+              <p className="text-muted-foreground">
+                Multiple palette variations extracted from your image
+              </p>
+            </div>
+            <AllPalettesDisplay 
+              palettes={allPalettes} 
+              onPaletteSelect={handlePaletteSelect}
+            />
+          </section>
         )}
 
-        {/* Middle row (Current Palette and Harmony Generator) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Current Palette Display */}
-          <PaletteDisplay 
-            colors={currentPalette}
-            harmony={currentHarmony}
-            onSave={handlePaletteSave}
-          />
+        {/* Palette Workspace */}
+        {hasImage && (
+          <section>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold gradient-text mb-2">
+                Palette Workspace
+              </h2>
+              <p className="text-muted-foreground">
+                Refine and customize your selected color palette
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <PaletteDisplay 
+                colors={currentPalette}
+                harmony={currentHarmony}
+                onSave={handlePaletteSave}
+              />
+              <HarmonyGenerator 
+                baseColor={extractedColors[0] || null} 
+                onHarmonyGenerated={handleHarmonyGenerated}
+              />
+            </div>
+          </section>
+        )}
 
-          {/* Harmony Generator */}
-          <HarmonyGenerator 
-            baseColor={extractedColors[0] || null} 
-            onHarmonyGenerated={handleHarmonyGenerated}
+        {/* Saved Palettes */}
+        <section>
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold gradient-text mb-2">
+              Your Collection
+            </h2>
+            <p className="text-muted-foreground">
+              Access and manage your saved color palettes
+            </p>
+          </div>
+          <SavedPalettes 
+            palettes={savedPalettes}
+            onPaletteLoad={handlePaletteLoad} 
+            onClearPalettes={handleClearSavedPalettes}
+            onDeletePalette={(id) => setSavedPalettes(prev => prev.filter(p => p.id !== id))}
           />
-        </div>
-
-        {/* Saved Palettes moved here (bottom) */}
-        <SavedPalettes 
-          palettes={savedPalettes}
-          onPaletteLoad={handlePaletteLoad} 
-          onClearPalettes={handleClearSavedPalettes}
-          onDeletePalette={(id) => setSavedPalettes(prev => prev.filter(p => p.id !== id))}
-        />
+        </section>
       </div>
 
-      {/* Footer */}
-      <footer className="max-w-7xl mx-auto mt-12 pt-8 border-t border-border/20">
-        <div className="text-center text-sm text-muted-foreground">
-          <p className="text-lg font-semibold mb-2">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI Colour Engine</span>
-            {' '} - Free Professional Color Palette Generator with AI Intelligence
-          </p>
-          <p className="text-sm text-muted-foreground/70">
-            Create hex color palettes, generate professional color schemes, and export color palettes for design. 
-            Advanced color scheme tool for designers and artists.
-          </p>
+      {/* Enhanced Footer */}
+      <footer className="relative mt-16 py-12 border-t border-border/20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+                <Palette className="w-5 h-5 text-white" />
+              </div>
+              <h3 className="text-xl font-bold gradient-text">
+                AI Colour Engine
+              </h3>
+            </div>
+            <p className="text-lg font-semibold mb-2 gradient-text-secondary">
+              Free Professional Color Palette Generator with AI Intelligence
+            </p>
+            <p className="text-sm text-muted-foreground/70 max-w-2xl mx-auto">
+              Create hex color palettes, generate professional color schemes, and export color palettes for design. 
+              Advanced color scheme tool for designers and artists powered by cutting-edge AI technology.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
