@@ -39,6 +39,52 @@ interface BrandIntelligenceProps {
   onBrandCreated?: (brand: BrandProfile) => void;
 }
 
+// Utility to generate complementary colors if industry mapping is missing
+function generateSecondaryColors(primaryColors: string[]): string[] {
+  // Simple complementary: shift hue by 180deg in HSL
+  function hexToHsl(hex: string) {
+    hex = hex.replace('#', '');
+    let r = parseInt(hex.substring(0, 2), 16) / 255;
+    let g = parseInt(hex.substring(2, 4), 16) / 255;
+    let b = parseInt(hex.substring(4, 6), 16) / 255;
+    let max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0, l = (max + min) / 2;
+    if (max !== min) {
+      let d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+    return { h: h * 360, s: s * 100, l: l * 100 };
+  }
+  function hslToHex(h: number, s: number, l: number) {
+    s /= 100; l /= 100;
+    let c = (1 - Math.abs(2 * l - 1)) * s;
+    let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+    let m = l - c / 2;
+    let r = 0, g = 0, b = 0;
+    if (h < 60) { r = c; g = x; b = 0; }
+    else if (h < 120) { r = x; g = c; b = 0; }
+    else if (h < 180) { r = 0; g = c; b = x; }
+    else if (h < 240) { r = 0; g = x; b = c; }
+    else if (h < 300) { r = x; g = 0; b = c; }
+    else { r = c; g = 0; b = x; }
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
+    return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+  }
+  return primaryColors.map(hex => {
+    const hsl = hexToHsl(hex);
+    const compH = (hsl.h + 180) % 360;
+    return hslToHex(compH, hsl.s, hsl.l);
+  });
+}
+
 export const BrandIntelligence: React.FC<BrandIntelligenceProps> = ({ onBrandCreated }) => {
   const [currentBrand, setCurrentBrand] = useState<BrandProfile | null>(null);
   const [brands, setBrands] = useState<BrandProfile[]>([]);
@@ -74,10 +120,17 @@ export const BrandIntelligence: React.FC<BrandIntelligenceProps> = ({ onBrandCre
       
       // Auto-create brand if name is provided
       if (brandName) {
+        let secondaryColors: string[] = [];
+        if (INDUSTRY_COLOR_MAPPING[selectedIndustry]?.secondary) {
+          secondaryColors = [...INDUSTRY_COLOR_MAPPING[selectedIndustry].secondary];
+        } else {
+          secondaryColors = generateSecondaryColors(analysis.dominantColors);
+        }
         const newBrand = brandIntelligence.createBrand({
           name: brandName,
           logo: URL.createObjectURL(file),
           primaryColors: analysis.dominantColors,
+          secondaryColors,
           personality: analysis.brandPersonality,
           industry: selectedIndustry
         });
@@ -143,9 +196,16 @@ export const BrandIntelligence: React.FC<BrandIntelligenceProps> = ({ onBrandCre
   const createNewBrand = () => {
     if (!brandName || !logoAnalysis) return;
     
+    let secondaryColors: string[] = [];
+    if (INDUSTRY_COLOR_MAPPING[selectedIndustry]?.secondary) {
+      secondaryColors = [...INDUSTRY_COLOR_MAPPING[selectedIndustry].secondary];
+    } else {
+      secondaryColors = generateSecondaryColors(logoAnalysis.dominantColors);
+    }
     const newBrand = brandIntelligence.createBrand({
       name: brandName,
       primaryColors: logoAnalysis.dominantColors,
+      secondaryColors,
       personality: logoAnalysis.brandPersonality,
       industry: selectedIndustry
     });
